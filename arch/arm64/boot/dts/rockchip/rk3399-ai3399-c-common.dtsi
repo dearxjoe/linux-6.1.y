@@ -13,7 +13,7 @@
 #include "rk3399.dtsi"
 #include "rk3399-opp.dtsi"
 #include "rk3399-ai3399-c-vop-clk-set.dtsi"
-
+#include "rk3399-ai3399-c-rkisp1.dtsi"
 
 / {
 	model = "ai3399-c boards based on Rockchip RK3399";
@@ -262,6 +262,35 @@
 		};
 	};
 
+	/delete-node/ gpio-keys;
+	gpio_keys: gpio-keys {
+		compatible = "gpio-keys";
+		autorepeat;
+		pinctrl-names = "default";
+		pinctrl-0 = <&power_key>;
+
+		power {
+			debounce-interval = <100>;
+			gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
+			label = "GPIO Key Power";
+			linux,code = <KEY_POWER>;
+			wakeup-source;
+		};
+	};
+
+	adc_keys: adc-keys {
+		compatible = "adc-keys";
+		io-channels = <&saradc 1>;
+		io-channel-names = "buttons";
+		keyup-threshold-microvolt = <1800000>;
+		poll-interval = <100>;
+
+		vol-up-key {
+			label = "volume up";
+			linux,code = <KEY_VOLUMEUP>;
+			press-threshold-microvolt = <1750>;
+		};
+	};
 
 	leds: gpio-leds {
 		compatible = "gpio-leds";
@@ -434,11 +463,6 @@
 	status = "disabled";
 };
 
-&route_edp {
-	status = "okay";
-	connect = <&vopl_out_edp>;
-	logo,mode = "center";
-};
 
 &cdn_dp {
 	status = "okay";
@@ -459,10 +483,6 @@
 	status = "disabled";
 };
 
-&route_hdmi {
-	status = "okay";
-	logo,mode = "center";
-};
 
 &isp0_mmu {
 	status = "okay";
