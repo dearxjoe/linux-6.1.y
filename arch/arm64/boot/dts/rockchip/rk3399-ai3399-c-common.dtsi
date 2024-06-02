@@ -13,7 +13,7 @@
 #include "rk3399.dtsi"
 #include "rk3399-opp.dtsi"
 #include "rk3399-ai3399-c-vop-clk-set.dtsi"
-#include "rk3399-ai3399-c-rkisp1.dtsi"
+
 
 / {
 	model = "ai3399-c boards based on Rockchip RK3399";
