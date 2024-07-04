@@ -127,7 +127,7 @@
     wireless_wlan: wireless-wlan {//抄袭
         compatible = "wlan-platdata";
         rockchip,grf = <&grf>;//待引用
-        wifi_chip_type = "ap6255";
+        wifi_chip_type = "rtl8723ds";
 		pinctrl-0 = <&wifi_host_wake_l>;
         WIFI,host_wake_irq = <&gpio0 RK_PA3 GPIO_ACTIVE_HIGH>;//待引用
         status = "okay";
